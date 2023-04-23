@@ -189,6 +189,9 @@ const Home = (props) => {
                             </button>
                         </div>
         </form>
+        <div>
+            <button onSubmit={navigate("/manage", { state: { email: email }})}>Manage Essays</button>
+        </div>
     </section>
   )
 }
