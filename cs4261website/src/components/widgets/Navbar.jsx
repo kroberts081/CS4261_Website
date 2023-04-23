@@ -24,10 +24,6 @@ const Navbar = () => {
     return(
         <>
             <nav className="flex justify-between pt-8">
-                <Text className="text-white font-bold text-xl">
-                    Welcome, <span className="italic"> Name </span>
-                </Text>
-
                 <Button onClick={handleLogout} className="py-1 px-6">
                     Logout
                 </Button>

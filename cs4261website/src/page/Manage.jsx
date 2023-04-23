@@ -26,13 +26,15 @@ const Manage = (props) => {
     }, [])
 
     useEffect(() => {
+        console.log("yes")
+        console.log(role)
         if (role == "student" || role == "Student") {
             console.log("am student")
             getEssays(query(collection(database, "Essays"), where("student", "==", email)));
         } else {
             getEssays(query(collection(database, "Essays"), where("reviewers", "array-contains", email)));
         }
-    }, [])
+    }, [essayList])
 
     const getEssays = async (query) => {
         const querySnapshot = await getDocs(query);

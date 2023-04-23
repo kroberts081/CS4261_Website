@@ -167,8 +167,6 @@ const Home = (props) => {
             </button>
         </div>
 </div>
-        
-
     </section>
   )
 }
