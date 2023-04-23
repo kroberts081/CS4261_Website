@@ -14,14 +14,29 @@ const Login = () => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed in 
-            //this.props.history.push({
-            //    pathname: '/home',
-            //    state: email
-            //})
             const user = userCredential.user;
             localStorage.setItem("email", email)
+            localStorage.setItem("role", "Student")
             navigate("/manage")
+            console.log(user);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage)
+        });
+        
+    }
+
+    const onLoginReviewer = (e) => {
+        console.log("hello")
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            localStorage.setItem("email", email)
+            localStorage.setItem("role", "Reviewer")
+            navigate("/reviewersmanage")
             console.log(user);
         })
         .catch((error) => {
@@ -76,7 +91,16 @@ const Login = () => {
                                         onClick={onLogin}
                                         className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                     >      
-                                        Login                                                                  
+                                        Login as Student                                                                 
+                                    </button>
+                                </div>
+
+                                <div>
+                                    <button                                     
+                                        onClick={onLoginReviewer}
+                                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    >      
+                                        Login as Reviewer                                                                
                                     </button>
                                 </div>
                                 
