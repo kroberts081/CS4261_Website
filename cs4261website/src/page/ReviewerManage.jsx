@@ -11,7 +11,7 @@ const ReviewerManage = (props) => {
     const [role,setRole]=useState([])
     const email = localStorage.getItem("email")
     useEffect(() => {
-        getRoles()
+        //getRoles()
     }, [])
     
 
@@ -28,13 +28,15 @@ const ReviewerManage = (props) => {
     useEffect(() => {
         console.log("yes")
         console.log(role)
-        if (role == "student" || role == "Student") {
-            console.log("am student")
-            navigate("/manage")
-            getEssays(query(collection(database, "Essays"), where("student", "==", email)));
-        } else {
-            getEssays(query(collection(database, "Essays"), where("reviewers", "array-contains", email)));
-        }
+        getEssays(query(collection(database, "Essays"), where("reviewers", "array-contains", email)));
+        //if (localStorage.getItem("role") || role == "Student") {
+            //onsole.log("am student")
+            //navigate("/manage")
+            //getEssays(query(collection(database, "Essays"), where("student", "==", email)));
+       // } else {
+       //     console.log("am reviewer")
+       //     getEssays(query(collection(database, "Essays"), where("reviewers", "array-contains", email)));
+       // }
     }, [])
 
     const getEssays = async (query) => {

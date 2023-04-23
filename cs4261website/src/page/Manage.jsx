@@ -13,7 +13,7 @@ const Manage = (props) => {
     //const role = "studnet";
     const email = localStorage.getItem("email")
     useEffect(() => {
-        getRoles()
+        //getRoles()
     }, [])
     
 
@@ -28,19 +28,17 @@ const Manage = (props) => {
     }, [])
 
     useEffect(() => {
-        getRoles()
-        console.log("HELLO HERER IE RADGSHAIHDG")
-        console.log(localStorage.getItem("role"))
-        console.log(role)
+        getEssays(query(collection(database, "Essays"), where("student", "==", email)));
+        //getRoles()
 
-        if (localStorage.getItem("role") == "student" || role == "Student") {
-            console.log("student")
-            getEssays(query(collection(database, "Essays"), where("student", "==", email)));
-        } else {
-            console.log("reviewer")
-            navigate("/reviewersmanage")
+       //if (localStorage.getItem("role") == "student" || role == "Student") {
+            //console.log("student")
+            //getEssays(query(collection(database, "Essays"), where("student", "==", email)));
+        //} else {
+            //console.log("reviewer")
+            //navigate("/reviewersmanage")
             //getEssays(query(collection(database, "Essays"), where("reviewers", "array-contains", email)));
-        }
+        //}
     }, [])
 
     const getEssays = async (query) => {
