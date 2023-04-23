@@ -16,14 +16,29 @@ const Login = () => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed in 
-            //this.props.history.push({
-            //    pathname: '/home',
-            //    state: email
-            //})
             const user = userCredential.user;
             localStorage.setItem("email", email)
-            navigate("/home")
+            localStorage.setItem("role", "Student")
+            navigate("/manage")
+            console.log(user);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage)
+        });
+        
+    }
+
+    const onLoginReviewer = (e) => {
+        console.log("hello")
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            localStorage.setItem("email", email)
+            localStorage.setItem("role", "Reviewer")
+            navigate("/reviewersmanage")
             console.log(user);
         })
         .catch((error) => {
@@ -54,7 +69,8 @@ const Login = () => {
                     <TextField id="email-address" size='medium' name="email" margin="normal" fullWidth label="Email" variant="outlined" onChange={(e)=>setEmail(e.target.value)}/>
                     <TextField id="password" size='medium' type='password' margin="normal" fullWidth label="Password" variant="outlined" onChange={(e)=>setPassword(e.target.value)}/>
 
-                    <Button variant='contained' fullWidth onClick={onLogin} sx={{ mt: 4}}> Login </Button>
+                    <Button variant='contained' fullWidth onClick={onLogin} sx={{ mt: 4}}> Login as Student </Button>
+                    <Button variant='contained' fullWidth onClick={onLoginReviewer} sx={{ mt: 4}}> Login as Reviewer </Button>
                     <Typography variant='body1' sx={{ mt: 4}}>
                         <NavLink to="/" className="underline text-tertiary"> No account yet? Sign up </NavLink>
                     </Typography>
