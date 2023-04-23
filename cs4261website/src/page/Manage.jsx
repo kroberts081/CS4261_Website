@@ -103,6 +103,7 @@ const Manage = (props) => {
                                 {essay.feedback}
                                 <Text>Essay Progress: </Text>
                                 {essay.progress}
+                                <iframe src={essay.link} style= {{ width:1000, height:600 }} ></iframe>
                             </p>
                         ))
                     }
