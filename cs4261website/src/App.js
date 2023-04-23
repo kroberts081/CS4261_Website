@@ -9,45 +9,61 @@ import {Routes, Route} from 'react-router-dom';
 // import Navbar from './components/widgets/Navbar';
 import Layout from './components/widgets/Layout';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 
 function App() {
 
+  const appTheme = createTheme({
+    palette: {
+      primary: {
+        main: '#6750a4'
+      },
+      secondary: {
+        main: '#625b71',
+      },
+      background: {
+        paper: "#ffffff",
+        default: '#ffffff',
+      },
+    },
+    typography: {
+      button: {
+        textTransform: "none",
+      }
+    },
+  });
+
   return (
-    <Router>
-      <div className="App bg-primary">
-        <section>          
-          <div>            
-            <Routes>
-           
-                <Route 
-                  path="/home"
-                  element={
-                    <Layout>
-                      < Home />
-                    </Layout>
-                  
-                  }
-                />
+    <ThemeProvider theme={appTheme}>
+    <CssBaseline />
+      <Router>     
+              <Routes>
+            
+                  <Route 
+                    path="/home"
+                    element={
+                      <Layout>
+                        < Home />
+                      </Layout>
+                    
+                    }
+                  />
 
-                <Route 
-                  path="/manage"
-                  element={
-                    <Layout>
-                      < Manage />
-                    </Layout>
-                  
-                  }
-                />              
-              
-              <Route path="/" element={<Signup/>}/>
-              <Route path="/login" element={<Login/>}/>
-            </Routes>          
-          </div>
-        </section>
-
-      </div>
-    </Router>
+                  <Route 
+                    path="/manage"
+                    element={
+                      <Layout>
+                        < Manage />
+                      </Layout>
+                    
+                    }
+                  />              
+                
+                <Route path="/" element={<Signup/>}/>
+                <Route path="/login" element={<Login/>}/>
+              </Routes>          
+      </Router>
+    </ThemeProvider>
   );
 }
 

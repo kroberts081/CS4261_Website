@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import Text from '../components/elements/Text';
 import {  signInWithEmailAndPassword   } from 'firebase/auth';
 import { auth } from '../firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
+import { TextField, Button, AppBar, Box, Icon, Typography, Avatar, Container } from '@mui/material';
+import LoginIcon from '@mui/icons-material/Login';
+import { ThemeProvider, useTheme } from '@emotion/react';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -33,67 +35,31 @@ const Login = () => {
     }
 
     return(
-        <>
-            <main >        
-                <section>
-                    <div className="flex h-screen items-center justify-center px-4 sm:px-6 lg:px-8">
-                        <div className="w-full max-w-md space-y-8">
-                            <form className="mt-8 space-y-6" >                            
-                                <div className=" space-y-6 rounded-md shadow-sm">
-                                    <div>
-                                        <label htmlFor="email-address" className="sr-only">
-                                        Email address
-                                        </label>
-                                        <input
-                                            id="email-address"
-                                            name="email"
-                                            type="email"                                    
-                                            required                                            
-                                            className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                            placeholder="Email address"
-                                            onChange={(e)=>setEmail(e.target.value)}
-                                        />
-                                    </div>
+            <Container maxWidth="sm">
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    marginTop: 6,
+                    m: 3}}> 
 
-                                    <div>
-                                        <label htmlFor="password" className="sr-only">
-                                            Password
-                                        </label>
-                                        <input
-                                            id="password"
-                                            name="password"
-                                            type="password"                                    
-                                            required                                            
-                                            className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                            placeholder="Password"
-                                            onChange={(e)=>setPassword(e.target.value)}
-                                        />
-                                    </div>
-                                </div>                        
+                    <Avatar sx={{ bgcolor: 'primary.main',  width: 50, height: 50 }}>
+                        <LoginIcon/>
+                    </Avatar>
 
-                                <div>
-                                    <button                                     
-                                        onClick={onLogin}
-                                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                    >      
-                                        Login                                                                  
-                                    </button>
-                                </div>
-                                
-                            </form>
-                        
-                            <p className="text-sm text-white text-center">
-                                No account yet?{' '}
-                                <NavLink to="/" className="underline text-tertiary">
-                                    Sign up
-                                </NavLink>
-                            </p>
-                            
-                        </div>
-                    </div>
-                </section>
-            </main>
-        </>
+                    <Typography variant="h5" component="div" sx={{mt:2}}>
+                        Login
+                    </Typography>
+
+                    <TextField id="email-address" size='medium' name="email" margin="normal" fullWidth label="Email" variant="outlined" onChange={(e)=>setEmail(e.target.value)}/>
+                    <TextField id="password" size='medium' type='password' margin="normal" fullWidth label="Password" variant="outlined" onChange={(e)=>setPassword(e.target.value)}/>
+
+                    <Button variant='contained' fullWidth onClick={onLogin} sx={{ mt: 4}}> Login </Button>
+                    <Typography variant='body1' sx={{ mt: 4}}>
+                        <NavLink to="/" className="underline text-tertiary"> No account yet? Sign up </NavLink>
+                    </Typography>
+                </Box>
+            </Container>
     )
 }
 
