@@ -21,7 +21,7 @@ const Login = () => {
             //})
             const user = userCredential.user;
             localStorage.setItem("email", email)
-            navigate("/home")
+            navigate("/manage")
             console.log(user);
         })
         .catch((error) => {

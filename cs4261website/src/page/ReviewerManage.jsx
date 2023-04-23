@@ -5,7 +5,7 @@ import EssayCard from '../components/EssayCard';
 import { useLocation, NavLink, useNavigate } from 'react-router-dom';
 import Text from '../components/elements/Text';
 
-const Manage = (props) => {
+const ReviewerManage = (props) => {
     const navigate = useNavigate();
     const [essayList, setEssayList] = useState([]);
     const [role,setRole]=useState([])
@@ -31,10 +31,10 @@ const Manage = (props) => {
         console.log(role)
         if (role == "student" || role == "Student") {
             console.log("am student")
+            navigate("/manage")
             getEssays(query(collection(database, "Essays"), where("student", "==", email)));
         } else {
-            navigate("/reviewersmanage")
-            //getEssays(query(collection(database, "Essays"), where("reviewers", "array-contains", email)));
+            getEssays(query(collection(database, "Essays"), where("reviewers", "array-contains", email)));
         }
     }, [])
 
@@ -51,6 +51,16 @@ const Manage = (props) => {
         console.log(arr)
     }
 
+    const addFeedback = async (essay) => {
+        console.log("add feedback")
+        console.log(essay)
+        localStorage.setItem("revieweremail", email)
+        localStorage.setItem("revieweressay", essay)
+        navigate("/feedback")
+
+    }
+
+
     const getRoles = async () => {
         const querySnapshot = await getDocs(query(collection(database, "UserRoles"), where("email", "==", email)))
             .then((querySnapshot)=>{               
@@ -60,12 +70,11 @@ const Manage = (props) => {
                 localStorage.setItem("role", newData[0].role)             
 
             })
-
     }
 
     return (
         <section>
-            <Text>Manage Essays</Text>
+            <Text>Manage Essays (reviewers) </Text>
 
             <div>
                     {
@@ -75,21 +84,25 @@ const Manage = (props) => {
                                 {essay.essay}
                                 <Text>Essay Due Date: </Text>
                                 {essay.due}
-                                <Text>Essay Reviewers: </Text>
-                                {essay.reviewers}
+                                <Text>Essay Student: </Text>
+                                {essay.student}
                                 <Text>Essay Link: </Text>
                                 {essay.link}
                                 <Text>Essay Feedback: </Text>
                                 {essay.feedback}
                                 <Text>Essay Progress: </Text>
                                 {essay.progress}
+                                <div className="btn-container">
+                                <button onClick={() => { addFeedback(essay.essay)} }>Add Feedback</button>
+                                </div>
                             </p>
                         ))
                     }
+
                 </div>
 
         </section>
     )
 }
 
-export default Manage
+export default ReviewerManage
