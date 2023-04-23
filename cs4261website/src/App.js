@@ -5,6 +5,8 @@ import Home from './page/Home';
 import Signup from './page/Signup';
 import Login from './page/Login';
 import Manage from './page/Manage';
+import Feedback from './page/Feedback';
+import ReviewerManage from './page/ReviewerManage';
 import {Routes, Route} from 'react-router-dom';
 // import Navbar from './components/widgets/Navbar';
 import Layout from './components/widgets/Layout';
@@ -38,7 +40,27 @@ function App() {
                     </Layout>
                   
                   }
-                />              
+                /> 
+
+                <Route 
+                  path="/reviewersmanage"
+                  element={
+                    <Layout>
+                      < ReviewerManage />
+                    </Layout>
+                  
+                  }
+                />   
+
+                <Route 
+                  path="/feedback"
+                  element={
+                    <Layout>
+                      < Feedback />
+                    </Layout>
+                  
+                  }
+                />            
               
               <Route path="/" element={<Signup/>}/>
               <Route path="/login" element={<Login/>}/>
