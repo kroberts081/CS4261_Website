@@ -59,7 +59,27 @@ function App() {
                       </Layout>
                     
                     }
-                  />              
+                  /> 
+
+                  <Route 
+                  path="/reviewersmanage"
+                  element={
+                    <Layout>
+                      < ReviewerManage />
+                    </Layout>
+                  
+                  }
+                />    
+
+                <Route 
+                  path="/feedback"
+                  element={
+                    <Layout>
+                      < Feedback />
+                    </Layout>
+                  
+                  }
+                />             
                 
                 <Route path="/" element={<Signup/>}/>
                 <Route path="/login" element={<Login/>}/>
@@ -70,6 +90,3 @@ function App() {
 }
 
 export default App;
-
-
-
