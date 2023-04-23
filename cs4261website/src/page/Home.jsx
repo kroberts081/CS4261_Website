@@ -11,17 +11,8 @@ import { database } from '../firebase';
 import { useLocation, NavLink, useNavigate } from 'react-router-dom';
 
 const Home = (props) => {
-    const navigate = useNavigate();
-    
-    const email = ""
-    const {state} = useLocation();
-    if (state == null || state.email == null) {
-        const email = ""
-    } else {
-        const email = state.email;
-    }
-    
-    //console.log(email)
+    const navigate = useNavigate();    
+    const email = localStorage.getItem("email")
     
     const [essayName, setEssayName] = useState(); 
     const [reviewer1, setReviewer1] = useState();
@@ -34,7 +25,9 @@ const Home = (props) => {
 
     let date = new Date().toISOString().slice(0, 10);
 
-    const uploadEssay = async () => {
+    const uploadEssay = async (e) => {
+        e.preventDefault();
+
         if (!essayName || (!reviewer1 && !reviewer2 && !reviewer3) || !essayLink) {
             alert("All fields are required")
             setLoading(false);
@@ -52,8 +45,11 @@ const Home = (props) => {
         if (reviewer3) {
             reviewers.push(reviewer3);
         }
-        console.log("hello")
-        console.log(database)
+        console.log(dueDate)
+        console.log(essayName)
+        console.log(essayLink)
+        console.log(email)
+        console.log(reviewers)
 
         try {
             const refData = await addDoc(collection(database, "Essays"), {
@@ -70,7 +66,6 @@ const Home = (props) => {
             console.error("Error adding document: ", e);
           }
         
-        alert("got here")
 
         setUploaded(true);
         setEssayName(null);
@@ -95,103 +90,85 @@ const Home = (props) => {
         } catch (e) {
             console.error("Error adding document: ", e);
           }
-          navigate("/home", { state: { email: email }})
+          var eName = document.getElementById("name") 
+          eName.value = ""
+          var r1 = document.getElementById("revieweremail") 
+          r1.value = ""
+          var r2 = document.getElementById("reviewer2email") 
+          r2.value = ""
+          var r3 = document.getElementById("reviewer3email") 
+          r3.value = ""
+          var eLink = document.getElementById("essayLink") 
+          eLink.value = ""
+          var dueDateR = document.getElementById("duedate") 
+          dueDateR.value = ""
+          
+          alert("Successfully uploaded essay!")
+          navigate("/manage")
     }
 
   return (
-    <section className="text-white pt-10 pb-20">        
+    <section className="upload-container">        
         <Text>Upload Essay</Text>
-        <form onSubmit={uploadEssay}>
         <div>
-                            <div>
-                                <label htmlFor="essay-name" className="sr-only">
-                                Essay Name
-                                </label>
-                                <input
-                                    type="essayname"
-                                    label="Essay Name"
-                                    value={essayName}
-                                    onChange={(e) => setEssayName(e.target.value)}                                    
-                                    required
-                                    placeholder="Essay Name"                                
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="reviewer-email" className="sr-only">
-                                Reviewer Email
-                                </label>
-                                <input
-                                    type="revieweremail"
-                                    label="Reviewer Email"
-                                    value={reviewer1}
-                                    onChange={(e) => setReviewer1(e.target.value)}                                    
-                                    required
-                                    placeholder="Reviewer Name"                                
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="reviewer-email2" className="sr-only">
-                                Reviewer 2 Email (optional)
-                                </label>
-                                <input
-                                    type="revieweremail2"
-                                    label="Reviewer Email"
-                                    value={reviewer2}
-                                    onChange={(e) => setReviewer2(e.target.value)}                                    
-                                    placeholder="Reviewer Name"                                
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="reviewer-email3" className="sr-only">
-                                Reviewer 3 Email (optional)
-                                </label>
-                                <input
-                                    type="revieweremail3"
-                                    label="Reviewer Email"
-                                    value={reviewer3}
-                                    onChange={(e) => setReviewer3(e.target.value)}                                    
-                                    placeholder="Reviewer Name"                                
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="essay-link" className="sr-only">
-                                Essay Link
-                                </label>
-                                <input
-                                    type="essaylink"
-                                    label="Essay Link"
-                                    value={essayLink}
-                                    onChange={(e) => setEssayLink(e.target.value)}                                    
-                                    required
-                                    placeholder="Essay Link"                                
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="due-date" className="sr-only">
-                                Due Date (yyyy-mm-dd)
-                                </label>
-                                <input
-                                    type="duedate"
-                                    label="Due Date"
-                                    value={dueDate}
-                                    onChange={(e) => setDueDate(e.target.value)}                                    
-                                    required
-                                    placeholder="Due Date (yyyy-mm-dd)"                                
-                                />
-                            </div>
-                        </div>                        
+   
+            <div>
+                <input
+                    type="text" id = "name"
+                        placeholder="Essay Name?"
+                    onChange={(e)=>setEssayName(e.target.value)}
+                />
+            </div>
+            <div>
+                <input
+                    type="text" id = "revieweremail"
+                        placeholder="Reviewer Email?"
+                    onChange={(e)=>setReviewer1(e.target.value)}
+                />
+            </div>
+            <div>
+                <input
+                    type="text" id = "reviewer2email"
+                        placeholder=" Reviewer 2 Email (optional)"
+                    onChange={(e)=>setReviewer2(e.target.value)}
+                />
+            </div>
 
-                        <div>
-                            <button
-                                type="submit"                                                               
-                            >   
-                                Upload Essay                                                             
-                            </button>
-                        </div>
-        </form>
-        <div>
-            <button onSubmit={navigate("/manage", { state: { email: email }})}>Manage Essays</button>
+            <div>
+                <input
+                    type="text" id = "reviewer3email"
+                        placeholder="Reviewer 3 Email (optional)"
+                    onChange={(e)=>setReviewer3(e.target.value)}
+                />
+            </div>
+
+            <div>
+                <input
+                    type="text" id = "essayLink"
+                        placeholder="Essay Link"
+                    onChange={(e)=>setEssayLink(e.target.value)}
+                />
+            </div>
+            <div>
+                <input
+                    type="text" id = "duedate"
+                        placeholder="Due Date"
+                    onChange={(e)=>setDueDate(e.target.value)}
+                />
+            </div>
+
+        <div className="btn-container">
+            <button
+                type="submit"
+                className="btn"
+                onClick={uploadEssay}
+            >
+                Upload Essay
+            </button>
         </div>
+</div>
+        
+
     </section>
   )
 }

@@ -58,68 +58,46 @@ const Signup = () => {
                 backgroundColor: 'white'
               }}>
                 <div className="Signup">
-                    <form onSubmit={onSubmit} >                    
-                        <div>
-                            <div>
-                                <label htmlFor="email-address" className="sr-only">
-                                Email address
-                                </label>
-                                <input
-                                    type="email"
-                                    label="Email address"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}                                    
-                                    required
-                                    placeholder="Email address"                                
-                                />
-                            </div>
-
-                            <div>
-                                <label htmlFor="password" className="sr-only">
-                                    Password
-                                </label>
-                                <input
-                                    type="password"
-                                    label="Create password"
-                                    value={password}
-                                    onChange={(e) => setPassword1(e.target.value)}                                    
-                                    required
-                                    placeholder="Password"                                
-                                />
-                            </div>
-
-                            <div>
-                                <label htmlFor="password" className="sr-only">
-                                    Confirm Password
-                                </label>
-                                <input
-                                    type="password"
-                                    label="Confirm password"
-                                    value={password}
-                                    onChange={(e) => setPassword2(e.target.value)}                                    
-                                    required
-                                    placeholder="Confirm Password"                                
-                                />
-                            </div>
-
-                            <div>
+                <div>
+   
+   <div>
+       <input
+           type="text" id = "email"
+               placeholder="Email?"
+           onChange={(e)=>setEmail(e.target.value)}
+       />
+   </div>
+   <div>
+       <input
+           type="text" id = "password"
+               placeholder="Password?"
+           onChange={(e)=>setPassword1(e.target.value)}
+       />
+   </div>
+   <div>
+       <input
+           type="text" id = "confirmpassword"
+               placeholder="Confirm Password"
+           onChange={(e)=>setPassword2(e.target.value)}
+       />
+   </div>
+   <div>
                                 <input type="radio" value="Student" 
                                 onChange={(e) => setUserRole(e.target.value)}/> Student
                                 <input type="radio" value="Reviewer"
                                 onChange={(e) => setUserRole(e.target.value)} /> Reviewer
                             </div>
-                        </div>                        
 
-                        <div>
-                            <button
-                                type="submit"                                                               
-                            >   
-                                Sign up                                                             
-                            </button>
-                        </div>
-                                             
-                    </form>
-                   
+<div className="btn-container">
+   <button
+       type="submit"
+       className="btn"
+       onClick={onSubmit}
+   >
+       Sign Up
+   </button>
+</div>
+</div>
 
                     <p className="text-sm text-white text-center">
                         Already have an account?{' '}

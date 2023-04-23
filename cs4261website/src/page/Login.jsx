@@ -20,7 +20,8 @@ const Login = () => {
             //    state: email
             //})
             const user = userCredential.user;
-            navigate("/home", { state: { email: email }})
+            localStorage.setItem("email", email)
+            navigate("/home")
             console.log(user);
         })
         .catch((error) => {

@@ -3,21 +3,21 @@ import { database } from '../firebase';
 import { getDoc, collection, where, query, doc, Firestore, getDocs } from 'firebase/firestore';
 import EssayCard from '../components/EssayCard';
 import { useLocation, NavLink, useNavigate } from 'react-router-dom';
+import Text from '../components/elements/Text';
 
 const Manage = (props) => {
     const [essayList, setEssayList] = useState([]);
-    const role = "studnet";
+    const [role,setRole]=useState([])
+    //const role = "studnet";
+    const email = localStorage.getItem("email")
+    useEffect(() => {
+        getRoles()
+    })
+    
+
     //set true if it takes to long to get essays
  
     const [loading, setLoading] = useState(true);
-
-    const email = "testtesttest@test.com"
-    const {state} = useLocation();
-    if (state == null || state.email == null) {
-        const email = ""
-    } else {
-        const email = state.email;
-    }
 
     useEffect(() => {
         setTimeout(() => {
@@ -26,17 +26,13 @@ const Manage = (props) => {
     }, [])
 
     useEffect(() => {
-        if (role == "student") {
+        if (role == "student" || role == "Student") {
+            console.log("am student")
             getEssays(query(collection(database, "Essays"), where("student", "==", email)));
         } else {
             getEssays(query(collection(database, "Essays"), where("reviewers", "array-contains", email)));
         }
     }, [])
-    useEffect(() => {
-        console.log("hello")
-        console.log(getRoles())
-    }, [])
-    
 
     const getEssays = async (query) => {
         const querySnapshot = await getDocs(query);
@@ -47,23 +43,47 @@ const Manage = (props) => {
         });
 
         setEssayList(arr);
+        console.log("HERE HELLO")
         console.log(arr)
     }
 
     const getRoles = async () => {
-        const querySnapshot = await getDocs(query(collection(database, "UserRoles"), where("email", "==", 'testtesttest@test.com')));
-        let arr = [];
+        const querySnapshot = await getDocs(query(collection(database, "UserRoles"), where("email", "==", email)))
+            .then((querySnapshot)=>{               
+                const newData = querySnapshot.docs
+                    .map((doc) => ({...doc.data(), id:doc.id }));
+                setRole(newData[0].role);   
+                localStorage.setItem("role", newData[0].role)             
 
-        querySnapshot.forEach((doc) => {
-            arr.push(doc.data());
-        });
-        console.log(querySnapshot)
-        console.log(arr)
-        return querySnapshot
+            })
+
     }
 
     return (
-        <section></section>
+        <section>
+            <Text>Manage Essays</Text>
+            <div>
+                    {
+                        essayList?.map((essay,i)=>(
+                            <p key={i}>
+                                <Text>Essay Name: </Text>
+                                {essay.essay}
+                                <Text>Essay Due Date: </Text>
+                                {essay.due}
+                                <Text>Essay Reviewers: </Text>
+                                {essay.reviewers}
+                                <Text>Essay Link: </Text>
+                                {essay.link}
+                                <Text>Essay Feedback: </Text>
+                                {essay.feedback}
+                                <Text>Essay Progress: </Text>
+                                {essay.progress}
+                            </p>
+                        ))
+                    }
+                </div>
+
+        </section>
     )
 }
 
