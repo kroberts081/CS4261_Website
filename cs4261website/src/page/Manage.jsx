@@ -9,6 +9,7 @@ const Manage = (props) => {
     const navigate = useNavigate();
     const [essayList, setEssayList] = useState([]);
     const [role,setRole]=useState([])
+    console.log(role)
     //const role = "studnet";
     const email = localStorage.getItem("email")
     useEffect(() => {
@@ -27,12 +28,16 @@ const Manage = (props) => {
     }, [])
 
     useEffect(() => {
-        console.log("yes")
+        getRoles()
+        console.log("HELLO HERER IE RADGSHAIHDG")
+        console.log(localStorage.getItem("role"))
         console.log(role)
-        if (role == "student" || role == "Student") {
-            console.log("am student")
+
+        if (localStorage.getItem("role") == "student" || role == "Student") {
+            console.log("student")
             getEssays(query(collection(database, "Essays"), where("student", "==", email)));
         } else {
+            console.log("reviewer")
             navigate("/reviewersmanage")
             //getEssays(query(collection(database, "Essays"), where("reviewers", "array-contains", email)));
         }
@@ -47,20 +52,37 @@ const Manage = (props) => {
         });
 
         setEssayList(arr);
-        console.log("HERE HELLO")
-        console.log(arr)
     }
 
     const getRoles = async () => {
-        const querySnapshot = await getDocs(query(collection(database, "UserRoles"), where("email", "==", email)))
-            .then((querySnapshot)=>{               
-                const newData = querySnapshot.docs
-                    .map((doc) => ({...doc.data(), id:doc.id }));
-                setRole(newData[0].role);   
-                localStorage.setItem("role", newData[0].role)             
+        console.log("here")
+        console.log("adahsfiuawegawdghaiusdhfiuashgdasg")
+        console.log(email)
+        try {
+            const querySnapshot = await getDocs(query(collection(database, "UserRoles"), where("email", "==", email)))
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                console.log(doc.data().role)
+                setRole(doc.data().role)
+                localStorage.setItem("role", doc.data().role)
+              });
+            //.then((querySnapshot.forEach((doc)))=>{   
+                //console.log(querySnapshot.docs)            
+                //const newData = querySnapshot.docs
+                    //.map((doc) => ({...doc.data(), id:doc.id }));
+                    
+                //setRole(newData[0].role);   
+                //localStorage.setItem("role", newData[0].role)             
 
-            })
-
+            //}
+            console.log("try")
+            console.log(role)
+            console.log(localStorage.getItem("role"))
+            //console.log(doc.data())
+        } catch (e) {
+            console.error("Error with feedback: ", e);
+          }
     }
 
     return (

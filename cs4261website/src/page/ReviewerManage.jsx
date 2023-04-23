@@ -9,7 +9,6 @@ const ReviewerManage = (props) => {
     const navigate = useNavigate();
     const [essayList, setEssayList] = useState([]);
     const [role,setRole]=useState([])
-    //const role = "studnet";
     const email = localStorage.getItem("email")
     useEffect(() => {
         getRoles()
@@ -62,14 +61,34 @@ const ReviewerManage = (props) => {
 
 
     const getRoles = async () => {
-        const querySnapshot = await getDocs(query(collection(database, "UserRoles"), where("email", "==", email)))
-            .then((querySnapshot)=>{               
-                const newData = querySnapshot.docs
-                    .map((doc) => ({...doc.data(), id:doc.id }));
-                setRole(newData[0].role);   
-                localStorage.setItem("role", newData[0].role)             
+        console.log("here")
+        console.log("adahsfiuawegawdghaiusdhfiuashgdasg")
+        console.log(email)
+        try {
+            const querySnapshot = await getDocs(query(collection(database, "UserRoles"), where("email", "==", email)))
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                console.log(doc.data().role)
+                setRole(doc.data().role)
+                localStorage.setItem("role", doc.data().role)
+              });
+            //.then((querySnapshot.forEach((doc)))=>{   
+                //console.log(querySnapshot.docs)            
+                //const newData = querySnapshot.docs
+                    //.map((doc) => ({...doc.data(), id:doc.id }));
+                    
+                //setRole(newData[0].role);   
+                //localStorage.setItem("role", newData[0].role)             
 
-            })
+            //}
+            console.log("try")
+            console.log(role)
+            console.log(localStorage.getItem("role"))
+            //console.log(doc.data())
+        } catch (e) {
+            console.error("Error with feedback: ", e);
+          }
     }
 
     return (
@@ -92,6 +111,9 @@ const ReviewerManage = (props) => {
                                 {essay.feedback}
                                 <Text>Essay Progress: </Text>
                                 {essay.progress}
+                            
+                                    <iframe src={essay.link} style= {{ width:1000, height:600 }} ></iframe>
+                              
                                 <div className="btn-container">
                                 <button onClick={() => { addFeedback(essay.essay)} }>Add Feedback</button>
                                 </div>
