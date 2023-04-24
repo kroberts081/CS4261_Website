@@ -4,6 +4,8 @@ import {  signInWithEmailAndPassword   } from 'firebase/auth';
 import { database } from '../firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { getDoc, collection, where, query, doc, Firestore, getDocs, setDoc} from 'firebase/firestore';
+import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import AppNav from '../components/AppNav';
 
 const Feedback = () => {
     const navigate = useNavigate();
@@ -46,36 +48,20 @@ const Feedback = () => {
     }
 
     return(
-        <>
-            <main >        
-                <section>
-                    <Text>Give Feedback</Text>
-                    <div>
-                    <input
-                        type="text" id = "feedback"
-                        placeholder="Feedback Notes?"
-                        onChange={(e)=>setFeedbackNotes(e.target.value)}
-                    />
-                    </div>
-                    <div>
-                    <input
-                        type="text" id = "feedbacklink"
-                        placeholder="Feedback Link?"
-                        onChange={(e)=>setFeedback(e.target.value)}
-                    />
-                    </div>
-                    <div className="btn-container">
-                        <button
-                        type="submit"
-                        className="btn"
-                        onClick={addFeedback}
-                        >
-                        Send Feedback 
-                        </button>
-                            </div>
-                </section>
-            </main>
-        </>
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'}}>
+            <AppNav/>
+
+            <Typography variant='h5' sx ={{ mt: 3}}>Add Essay Feedback</Typography>
+            <Container  maxWidth="sm">
+                <TextField id="feedback_notes" size='medium' multiline fullWidth margin="normal" label="Feedback Notes" variant="outlined" minRows={4} onChange={(e)=>setFeedbackNotes(e.target.value)}/>
+                <TextField id="feedback_link" size='medium' fullWidth margin="normal" label="Link" variant="outlined" onChange={(e)=>setFeedback(e.target.value)}/>
+
+                <Button variant='contained' onClick={addFeedback} sx={{ mt: 2}}>Submit Feedback</Button>
+            </Container>
+        </Box>
     )
 }
 

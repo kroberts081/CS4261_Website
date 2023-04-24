@@ -4,6 +4,8 @@ import { getDoc, collection, where, query, doc, Firestore, getDocs } from 'fireb
 import EssayCard from '../components/EssayCard';
 import { useLocation, NavLink, useNavigate } from 'react-router-dom';
 import Text from '../components/elements/Text';
+import { Box, Button, Card, CardActions, CardContent, CardHeader, Container, Typography } from '@mui/material';
+import AppNav from '../components/AppNav';
 
 const Manage = (props) => {
     const navigate = useNavigate();
@@ -84,32 +86,27 @@ const Manage = (props) => {
     }
 
     return (
-        <section>
-            <Text>Manage Essays</Text>
-
-            <div>
-                    {
-                        essayList?.map((essay,i)=>(
-                            <p key={i}>
-                                <Text>Essay Name: </Text>
-                                {essay.essay}
-                                <Text>Essay Due Date: </Text>
-                                {essay.due}
-                                <Text>Essay Reviewers: </Text>
-                                {essay.reviewers}
-                                <Text>Essay Link: </Text>
-                                {essay.link}
-                                <Text>Essay Feedback: </Text>
-                                {essay.feedback}
-                                <Text>Essay Progress: </Text>
-                                {essay.progress}
-                                <iframe src={essay.link} style= {{ width:1000, height:600 }} ></iframe>
-                            </p>
-                        ))
-                    }
-                </div>
-
-        </section>
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'}}>
+            <AppNav/>
+            <Typography variant='h5' sx ={{ mt: 3}}>Essays Sent</Typography>
+    
+            <Container maxWidth="sm">
+                {essayList?.map((essay,i)=>(
+                    <Card key={i} variant="outlined" sx = {{mb: 2, borderWidth: 2, borderColor:"primary.main"}}>
+                        <CardHeader title={essay.essay} subheader={essay.student}/>
+                        <CardContent>
+                            <Typography variant="body1">{"Due Date: " + essay.due}</Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button variant='contained' href ={essay.link} sx = {{ml: 1}} target="_blank">View Essay</Button>
+                        </CardActions>
+                    </Card>
+                ))}
+            </Container>
+        </Box>
     )
 }
 

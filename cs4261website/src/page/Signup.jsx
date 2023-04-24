@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
-import Text from '../components/elements/Text';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import {  createUserWithEmailAndPassword  } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { database } from '../firebase';
-import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
+import { collection, setDoc, doc } from 'firebase/firestore';
+import { TextField, Button, Box, Typography, Avatar, Container, Radio, RadioGroup, FormControlLabel } from '@mui/material';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -47,69 +48,57 @@ const Signup = () => {
       }
 
   return (
-    <main style={{
-        backgroundColor: 'white'
-      }}>        
-        <section style={{
-                backgroundColor: 'white'
-              }}>
-            <div className="App"
-            style={{
-                backgroundColor: 'white'
-              }}>
-                <div className="Signup">
-                <div>
-   
-   <div>
-       <input
-           type="text" id = "email"
-               placeholder="Email?"
-           onChange={(e)=>setEmail(e.target.value)}
-       />
-   </div>
-   <div>
-       <input
-           type="text" id = "password"
-               placeholder="Password?"
-           onChange={(e)=>setPassword1(e.target.value)}
-       />
-   </div>
-   <div>
-       <input
-           type="text" id = "confirmpassword"
-               placeholder="Confirm Password"
-           onChange={(e)=>setPassword2(e.target.value)}
-       />
-   </div>
-   <div>
-                                <input type="radio" value="Student" 
-                                onChange={(e) => setUserRole(e.target.value)}/> Student
-                                <input type="radio" value="Reviewer"
-                                onChange={(e) => setUserRole(e.target.value)} /> Reviewer
-                            </div>
+    <Container maxWidth="sm">
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop: 6,
+        m: 3}}> 
 
-<div className="btn-container">
-   <button
-       type="submit"
-       className="btn"
-       onClick={onSubmit}
-   >
-       Sign Up
-   </button>
-</div>
-</div>
+        <Avatar sx={{ bgcolor: 'secondary.main',  width: 50, height: 50 }}>
+          <PersonAddIcon/>
+        </Avatar>
 
-                    <p className="text-sm text-white text-center">
-                        Already have an account?{' '}
-                        <NavLink to="/login" className="underline text-tertiary">
-                            Sign in
-                        </NavLink>
-                    </p>
-                    
-                </div>
-            </div>
-        </section>
-    </main>
+        <Typography variant="h5" component="div" sx={{mt:2}}>
+          Create Account
+        </Typography>
+
+        <TextField id="email-address" size='medium' name="email" margin="normal" fullWidth label="Email" variant="outlined" onChange={(e)=>setEmail(e.target.value)}/>
+        <TextField id="password1" size='medium' type='password' margin="normal" fullWidth label="Password" variant="outlined" onChange={(e)=>setPassword1(e.target.value)}/>
+        <TextField id="password2" size='medium' type='password' margin="normal" fullWidth label="Confirm Password" variant="outlined" onChange={(e)=>setPassword2(e.target.value)}/>
+      </Box>
+
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'left',
+        m: 3}}>
+          <Typography variant="h6">
+            Please Select Account Type:
+          </Typography>
+
+          <RadioGroup defaultValue="student" name="radio-select" fullWidth>
+            <FormControlLabel value="Student" control={<Radio />} label="Student" onChange={(e) => setUserRole(e.target.value)}/>
+            <FormControlLabel value="Reviewer" control={<Radio />} label="Reviewer" onChange={(e) => setUserRole(e.target.value)} />
+        </RadioGroup>
+      </Box>
+
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop: 6,
+        m: 3}}>
+
+        <Button variant='contained' type="submit" fullWidth sx={{ mt: 4}} onClick={onSubmit}> Create Account </Button>
+
+        <Typography variant='body1' sx={{ mt: 4}}>
+          <NavLink to="/login" className="underline text-tertiary"> Already have an account? Log In </NavLink>
+        </Typography>
+
+      </Box>
+    </Container>
   )
 }
 

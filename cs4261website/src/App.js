@@ -1,79 +1,51 @@
-import React, {useState, useEffect} from 'react';
-import bg from './components/assets/bg.png';
-// import Sidebar from './components/widgets/Sidebar';
-import Home from './page/Home';
+import React from 'react';
+import Upload from './page/Upload';
 import Signup from './page/Signup';
 import Login from './page/Login';
 import Manage from './page/Manage';
 import Feedback from './page/Feedback';
 import ReviewerManage from './page/ReviewerManage';
 import {Routes, Route} from 'react-router-dom';
-// import Navbar from './components/widgets/Navbar';
-import Layout from './components/widgets/Layout';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 
 function App() {
 
+  const appTheme = createTheme({
+    palette: {
+      primary: {
+        main: '#6750a4'
+      },
+      secondary: {
+        main: '#036d19',
+      },
+      background: {
+        paper: "#ffffff",
+        default: '#ffffff',
+      },
+    },
+    typography: {
+      button: {
+        textTransform: "none",
+      }
+    },
+  });
+
   return (
     <Router>
-      <div className="App bg-primary">
-        <section>          
-          <div>            
-            <Routes>
-           
-                <Route 
-                  path="/home"
-                  element={
-                    <Layout>
-                      < Home />
-                    </Layout>
-                  
-                  }
-                />
-
-                <Route 
-                  path="/manage"
-                  element={
-                    <Layout>
-                      < Manage />
-                    </Layout>
-                  
-                  }
-                /> 
-
-                <Route 
-                  path="/reviewersmanage"
-                  element={
-                    <Layout>
-                      < ReviewerManage />
-                    </Layout>
-                  
-                  }
-                />   
-
-                <Route 
-                  path="/feedback"
-                  element={
-                    <Layout>
-                      < Feedback />
-                    </Layout>
-                  
-                  }
-                />            
-              
-              <Route path="/" element={<Signup/>}/>
-              <Route path="/login" element={<Login/>}/>
-            </Routes>          
-          </div>
-        </section>
-
-      </div>
+      <ThemeProvider theme={appTheme}>
+      <CssBaseline />
+        <Routes>     
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/manage" element={<Manage />} />
+          <Route path="/reviewersmanage" element={<ReviewerManage />} />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/" element={<Signup />} />
+          <Route path="/login" element={<Login/>}/>
+        </Routes>
+      </ThemeProvider>
     </Router>
   );
 }
 
 export default App;
-
-
-
