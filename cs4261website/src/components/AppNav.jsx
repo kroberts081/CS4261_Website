@@ -9,6 +9,7 @@ import { NavLink } from 'react-router-dom';
 
 const AppNav = (props) => {
     const navigate = useNavigate();
+    const role = auth.currentUser;
 
     const handleLogout = () => {
         signOut(auth).then(() => {

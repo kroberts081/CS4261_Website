@@ -62,7 +62,6 @@ const ReviewerManage = (props) => {
 
     const getRoles = async () => {
         console.log("here")
-        console.log("adahsfiuawegawdghaiusdhfiuashgdasg")
         console.log(email)
         try {
             const querySnapshot = await getDocs(query(collection(database, "UserRoles"), where("email", "==", email)))

@@ -124,7 +124,7 @@ const Upload = (props) => {
             <TextField id="reviewer2email" size='medium' fullWidth margin="normal" label="(Optional) Reviewer 2 Email" variant="outlined" onChange={(e)=>setReviewer2(e.target.value)}/>
             <TextField id="reviewer3email" size='medium' fullWidth margin="normal" label="(Optional) Reviewer 3 Email" variant="outlined" onChange={(e)=>setReviewer3(e.target.value)}/>
             <TextField id="essayLink" size='medium' fullWidth margin="normal" label="Essay Link" variant="outlined" onChange={(e)=>setEssayLink(e.target.value)}/>
-            <TextField id="duedate" size='medium' fullWidth margin="normal" label="Due Date (YYYY-MM-DD)" variant="outlined" onChange={(e)=>setEssayLink(e.target.value)}/>
+            <TextField id="duedate" size='medium' fullWidth margin="normal" label="Due Date (YYYY-MM-DD)" variant="outlined" onChange={(e)=>setDueDate(e.target.value)}/>
 
             <Button variant='contained' onClick={uploadEssay} sx={{ mt: 4}}>Upload Essay</Button>
         </Container>
