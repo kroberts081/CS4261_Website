@@ -38,7 +38,6 @@ const AppNav = (props) => {
                     <Button sx={{ color: '#ffffff'}} component={NavLink} to={'/upload'}>Upload Essays</Button>
                     <Button sx={{ color: '#ffffff'}} component={NavLink} to={'/manage'}>Student Manage</Button>
                     <Button sx={{ color: '#ffffff'}} component={NavLink} to={'/reviewersmanage'}>Reviewer Manage</Button>
-                    <Button sx={{ color: '#ffffff'}} component={NavLink} to={'/feedback'}>Feedback</Button>
                     <IconButton onClick={handleLogout} sx={{ color: '#ffffff'}}>
                         <LogoutIcon/>
                     </IconButton>

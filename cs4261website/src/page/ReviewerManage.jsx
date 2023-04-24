@@ -105,8 +105,6 @@ const ReviewerManage = (props) => {
                         <CardHeader title={essay.essay} subheader={essay.student}/>
                         <CardContent>
                             <Typography variant="body1">{"Due Date: " + essay.due}</Typography>
-                            <Typography variant="body1">{"Feedback: " + essay.feedback}</Typography>
-                            <Typography variant="body1">{"Essay Progress: " + essay.progress}</Typography>
                         </CardContent>
                         <CardActions>
                             <Button variant='contained' onClick={() => { addFeedback(essay.essay)} }>Add Feedback</Button>
