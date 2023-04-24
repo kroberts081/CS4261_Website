@@ -81,6 +81,9 @@ const Upload = (props) => {
         try {
             reviewers.forEach(async (reviewer) => {
                 let id = essayName + ":" + reviewer;
+                console.log("here")
+                console.log(id)
+                console.log(essayName)
                 await setDoc(doc(database, "Feedback", id), {
                     essayName: essayName,
                     feedbackLink: "",

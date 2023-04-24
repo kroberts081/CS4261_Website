@@ -18,6 +18,7 @@ const Feedback = () => {
     
     const email = localStorage.getItem("revieweremail")
     const essay = localStorage.getItem("revieweressay")
+    const studentemail = localStorage.getItem("studentemail")
     console.log(email)
     console.log(essay)
        
@@ -29,13 +30,19 @@ const Feedback = () => {
         }
         // getEssays(query(collection(database, "Essays"), where("student", "==", student), where("essay", "==", essay)));
         let id = essay + ":" + email
+        console.log("Notes")
+        console.log(id)
+        console.log(feedbackNotes)
+        console.log(feedback)
+        console.log(student)
         try {
             await setDoc(doc(database, "Feedback", id), {
                 essayName: essay,
-                student: student,
+                student: studentemail,
                 feedbackLink: feedback,
                 feedbackNotes: feedbackNotes,
-                reviewer: email
+                reviewer: email,
+                progress: "Received"
             });
         } catch (e) {
             console.error("Error with feedback: ", e);

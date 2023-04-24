@@ -51,11 +51,12 @@ const ReviewerManage = (props) => {
         console.log(arr)
     }
 
-    const addFeedback = async (essay) => {
+    const addFeedback = async (essay, student) => {
         console.log("add feedback")
         console.log(essay)
         localStorage.setItem("revieweremail", email)
         localStorage.setItem("revieweressay", essay)
+        localStorage.setItem("studentemail", student)
         navigate("/feedback")
     }
 
@@ -105,8 +106,9 @@ const ReviewerManage = (props) => {
                         <CardContent>
                             <Typography variant="body1">{"Due Date: " + essay.due}</Typography>
                         </CardContent>
+                        <iframe src={essay.link} style= {{ width:1000, height:600 }} ></iframe>
                         <CardActions>
-                            <Button variant='contained' onClick={() => { addFeedback(essay.essay)} }>Add Feedback</Button>
+                            <Button variant='contained' onClick={() => { addFeedback(essay.essay, essay.student)} }>Add Feedback</Button>
                             <Button variant='contained' href ={essay.link} sx = {{ml: 1}} target="_blank">View Essay</Button>
                         </CardActions>
                     </Card>

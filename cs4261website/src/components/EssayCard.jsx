@@ -11,7 +11,7 @@ const EssayCard = (props) => {
     const [ready, setReady] = useState(false);
   
     useEffect(() => {
-      if (props.role == "reviewer") {
+      if (1 == 1) {
         getFeedback();
       }
       setTimeout(() => {
@@ -29,6 +29,8 @@ const EssayCard = (props) => {
       if (!snapShot.exists()) {
         return;
       }
+      console.log("here")
+      console.log(snapShot.data())
   
       setStage(snapShot.data().progress);
     }

@@ -31,7 +31,8 @@ const Signup = () => {
           navigate("/login");
         })
         .catch((error) => {
-          alert("Passwords must contain: \n  - At Least 6 Characters \n  - One Uppercase Character");
+          alert(error)
+          //alert("Passwords must contain: \n  - At Least 6 Characters \n  - One Uppercase Character");
         })
       } else {
         setPassword2(null);

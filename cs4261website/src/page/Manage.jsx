@@ -100,6 +100,7 @@ const Manage = (props) => {
                         <CardContent>
                             <Typography variant="body1">{"Due Date: " + essay.due}</Typography>
                         </CardContent>
+                        <iframe src={essay.link} style= {{ width:1000, height:600 }} ></iframe>
                         <CardActions>
                             <Button variant='contained' href ={essay.link} sx = {{ml: 1}} target="_blank">View Essay</Button>
                         </CardActions>
