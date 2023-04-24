@@ -24,12 +24,16 @@ const AppNav = (props) => {
     return (
         <AppBar position='static'>
             <Toolbar>
-                <Icon>
-                    <HistoryEduIcon/>
-                </Icon>
-                <Typography variant="h6" component="div" sx={{ ml: 2 }}>
-                        College Application Help
-                </Typography>
+                <Box sx={{marginRight:"auto"}}>
+                  <Box sx={{flexDirection:"row", display:"flex", alignItems:"center"}}>
+                    <Icon>
+                        <HistoryEduIcon/>
+                    </Icon>
+                    <Typography variant="h6" component="div" sx={{ ml: 2 }}>
+                            College Application Help
+                    </Typography>
+                    </Box>
+                </Box>
                 <Box>
                     <Button sx={{ color: '#ffffff'}} component={NavLink} to={'/upload'}>Upload Essays</Button>
                     <Button sx={{ color: '#ffffff'}} component={NavLink} to={'/manage'}>Student Manage</Button>

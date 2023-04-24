@@ -10,7 +10,7 @@ import { collection, addDoc, setDoc, doc, query, where, getDocs } from 'firebase
 import { database } from '../firebase';
 import { useLocation, NavLink, useNavigate } from 'react-router-dom';
 import AppNav from '../components/AppNav';
-import { AppBar, Box } from '@mui/material';
+import { AppBar, Box, Container, TextField, Typography } from '@mui/material';
 
 
 const Upload = (props) => {
@@ -30,6 +30,12 @@ const Upload = (props) => {
 
     const uploadEssay = async (e) => {
         e.preventDefault();
+
+        if (!essayName || (!reviewer1 && !reviewer2 && !reviewer3) || !essayLink) {
+            alert("All fields are required")
+            setLoading(false);
+            return;
+        }
 
         if (!essayName || (!reviewer1 && !reviewer2 && !reviewer3) || !essayLink) {
             alert("All fields are required")
@@ -111,69 +117,25 @@ const Upload = (props) => {
     }
 
   return (
-    <Box>
+    <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'}}>
         <AppNav/>
+        <Typography variant='h5' sx ={{ mt: 3}}>Upload a Link to Your Essay</Typography>
+
+        <Container maxWidth="sm">
+            <TextField id="name" size='medium' fullWidth margin="normal" label="Essay Name" variant="outlined" onChange={(e)=>setEssayName(e.target.value)}/>
+            <TextField id="revieweremail" size='medium' fullWidth margin="normal" label="Reviewer 1 Email" variant="outlined" onChange={(e)=>setReviewer1(e.target.value)}/>
+            <TextField id="reviewer2email" size='medium' fullWidth margin="normal" label="(Optional) Reviewer 2 Email" variant="outlined" onChange={(e)=>setReviewer2(e.target.value)}/>
+            <TextField id="reviewer3email" size='medium' fullWidth margin="normal" label="(Optional) Reviewer 3 Email" variant="outlined" onChange={(e)=>setReviewer3(e.target.value)}/>
+            <TextField id="essayLink" size='medium' fullWidth margin="normal" label="Essay Link" variant="outlined" onChange={(e)=>setEssayLink(e.target.value)}/>
+            <TextField id="duedate" size='medium' fullWidth margin="normal" label="Due Date (YYYY-MM-DD)" variant="outlined" onChange={(e)=>setEssayLink(e.target.value)}/>
+
+            <Button variant='contained' onClick={uploadEssay} sx={{ mt: 4}}>Upload Essay</Button>
+        </Container>
+
     </Box>
-//     <section className="upload-container">       
-//         <Text>Upload Essay</Text>
-//         <div>
-   
-//             <div>
-//                 <input
-//                     type="text" id = "name"
-//                         placeholder="Essay Name?"
-//                     onChange={(e)=>setEssayName(e.target.value)}
-//                 />
-//             </div>
-//             <div>
-//                 <input
-//                     type="text" id = "revieweremail"
-//                         placeholder="Reviewer Email?"
-//                     onChange={(e)=>setReviewer1(e.target.value)}
-//                 />
-//             </div>
-//             <div>
-//                 <input
-//                     type="text" id = "reviewer2email"
-//                         placeholder=" Reviewer 2 Email (optional)"
-//                     onChange={(e)=>setReviewer2(e.target.value)}
-//                 />
-//             </div>
-
-//             <div>
-//                 <input
-//                     type="text" id = "reviewer3email"
-//                         placeholder="Reviewer 3 Email (optional)"
-//                     onChange={(e)=>setReviewer3(e.target.value)}
-//                 />
-//             </div>
-
-//             <div>
-//                 <input
-//                     type="text" id = "essayLink"
-//                         placeholder="Essay Link"
-//                     onChange={(e)=>setEssayLink(e.target.value)}
-//                 />
-//             </div>
-//             <div>
-//                 <input
-//                     type="text" id = "duedate"
-//                         placeholder="Due Date"
-//                     onChange={(e)=>setDueDate(e.target.value)}
-//                 />
-//             </div>
-
-//         <div className="btn-container">
-//             <button
-//                 type="submit"
-//                 className="btn"
-//                 onClick={uploadEssay}
-//             >
-//                 Upload Essay
-//             </button>
-//         </div>
-// </div>
-//     </section>
   )
 }
 
