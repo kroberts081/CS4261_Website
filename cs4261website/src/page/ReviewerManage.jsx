@@ -99,14 +99,14 @@ const ReviewerManage = (props) => {
             <AppNav/>
             <Typography variant='h5' sx ={{ mt: 3}}>Essays Assigned to Review</Typography>
     
-            <Container maxWidth="sm">
+            <Container maxWidth="lg">
                 {essayList?.map((essay,i)=>(
                     <Card key={i} variant="outlined" sx = {{mb: 2, borderWidth: 2, borderColor:"primary.main"}}>
                         <CardHeader title={essay.essay} subheader={essay.student}/>
                         <CardContent>
                             <Typography variant="body1">{"Due Date: " + essay.due}</Typography>
                         </CardContent>
-                        <iframe src={essay.link} style= {{ width:1000, height:600 }} ></iframe>
+                        <p align="center"><iframe src={essay.link} style= {{ width:1100, height:400 }} scrolling="yes"></iframe></p>
                         <CardActions>
                             <Button variant='contained' onClick={() => { addFeedback(essay.essay, essay.student)} }>Add Feedback</Button>
                             <Button variant='contained' href ={essay.link} sx = {{ml: 1}} target="_blank">View Essay</Button>
