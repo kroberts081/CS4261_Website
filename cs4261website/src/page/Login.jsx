@@ -58,7 +58,7 @@ const Login = () => {
                     marginTop: 6,
                     m: 3}}> 
 
-                    <Avatar sx={{ bgcolor: 'primary.main',  width: 50, height: 50 }}>
+                    <Avatar sx={{ bgcolor: 'secondary.main',  width: 50, height: 50 }}>
                         <LoginIcon/>
                     </Avatar>
 
@@ -70,7 +70,7 @@ const Login = () => {
                     <TextField id="password" size='medium' type='password' margin="normal" fullWidth label="Password" variant="outlined" onChange={(e)=>setPassword(e.target.value)}/>
 
                     <Button variant='contained' fullWidth onClick={onLogin} sx={{ mt: 4}}> Login as Student </Button>
-                    <Button variant='contained' fullWidth onClick={onLoginReviewer} sx={{ mt: 4}}> Login as Reviewer </Button>
+                    <Button variant='contained' fullWidth onClick={onLoginReviewer} sx={{ mt: 1 }}> Login as Reviewer </Button>
                     <Typography variant='body1' sx={{ mt: 4}}>
                         <NavLink to="/" className="underline text-tertiary"> No account yet? Sign up </NavLink>
                     </Typography>

@@ -21,7 +21,7 @@ function App() {
         main: '#6750a4'
       },
       secondary: {
-        main: '#625b71',
+        main: '#036d19',
       },
       background: {
         paper: "#ffffff",
