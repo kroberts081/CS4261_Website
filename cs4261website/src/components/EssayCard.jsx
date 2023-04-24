@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react'
-//import Dropdown from './Dropdown';
-//import Feedback from './Feedback';
-//import StudentFeedback from './StudentFeedback';
 import { database } from '../firebase';
 import { collection, addDoc, setDoc, doc, query, where, getDoc } from 'firebase/firestore';
 

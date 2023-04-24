@@ -1,10 +1,8 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { database } from '../firebase';
-import { getDoc, collection, where, query, doc, Firestore, getDocs } from 'firebase/firestore';
-import EssayCard from '../components/EssayCard';
-import { useLocation, NavLink, useNavigate } from 'react-router-dom';
-import Text from '../components/elements/Text';
-import { Box, Button, Card, CardActions, CardContent, CardHeader, Container, Link, Typography } from '@mui/material';
+import { collection, where, query, getDocs } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { Box, Button, Card, CardActions, CardContent, CardHeader, Container, Typography } from '@mui/material';
 import AppNav from '../components/AppNav';
 
 const ReviewerManage = (props) => {
@@ -50,7 +48,6 @@ const ReviewerManage = (props) => {
         });
 
         setEssayList(arr);
-        console.log("HERE HELLO")
         console.log(arr)
     }
 

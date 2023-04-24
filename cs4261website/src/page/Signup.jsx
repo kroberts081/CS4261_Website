@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
-import Text from '../components/elements/Text';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import {  createUserWithEmailAndPassword  } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { database } from '../firebase';
-import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
-import { TextField, Button, AppBar, Box, Icon, Typography, Avatar, Container, Radio, RadioGroup, FormControlLabel } from '@mui/material';
+import { collection, setDoc, doc } from 'firebase/firestore';
+import { TextField, Button, Box, Typography, Avatar, Container, Radio, RadioGroup, FormControlLabel } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 const Signup = () => {

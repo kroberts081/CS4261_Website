@@ -1,16 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Card from '../components/elements/Card';
-import Text from '../components/elements/Text';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
-import Time from '../components/widgets/Time';
-import Settings from '../components/widgets/Settings';
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from '../firebase'; 
-import { collection, addDoc, setDoc, doc, query, where, getDocs } from 'firebase/firestore';
+import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
 import { database } from '../firebase';
-import { useLocation, NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AppNav from '../components/AppNav';
-import { AppBar, Box, Container, TextField, Typography } from '@mui/material';
+import { Box, Container, TextField, Typography } from '@mui/material';
 
 
 const Upload = (props) => {
