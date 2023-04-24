@@ -4,6 +4,8 @@ import {  signInWithEmailAndPassword   } from 'firebase/auth';
 import { database } from '../firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { getDoc, collection, where, query, doc, Firestore, getDocs, setDoc} from 'firebase/firestore';
+import { Box } from '@mui/material';
+import AppNav from '../components/AppNav';
 
 const Feedback = () => {
     const navigate = useNavigate();
@@ -46,36 +48,37 @@ const Feedback = () => {
     }
 
     return(
-        <>
-            <main >        
-                <section>
-                    <Text>Give Feedback</Text>
-                    <div>
-                    <input
-                        type="text" id = "feedback"
-                        placeholder="Feedback Notes?"
-                        onChange={(e)=>setFeedbackNotes(e.target.value)}
-                    />
-                    </div>
-                    <div>
-                    <input
-                        type="text" id = "feedbacklink"
-                        placeholder="Feedback Link?"
-                        onChange={(e)=>setFeedback(e.target.value)}
-                    />
-                    </div>
-                    <div className="btn-container">
-                        <button
-                        type="submit"
-                        className="btn"
-                        onClick={addFeedback}
-                        >
-                        Send Feedback 
-                        </button>
-                            </div>
-                </section>
-            </main>
-        </>
+        <Box>
+            <AppNav/>
+        </Box>
+            // <main >        
+            //     <section>
+            //         <Text>Give Feedback</Text>
+            //         <div>
+            //         <input
+            //             type="text" id = "feedback"
+            //             placeholder="Feedback Notes?"
+            //             onChange={(e)=>setFeedbackNotes(e.target.value)}
+            //         />
+            //         </div>
+            //         <div>
+            //         <input
+            //             type="text" id = "feedbacklink"
+            //             placeholder="Feedback Link?"
+            //             onChange={(e)=>setFeedback(e.target.value)}
+            //         />
+            //         </div>
+            //         <div className="btn-container">
+            //             <button
+            //             type="submit"
+            //             className="btn"
+            //             onClick={addFeedback}
+            //             >
+            //             Send Feedback 
+            //             </button>
+            //                 </div>
+            //     </section>
+            // </main>
     )
 }
 

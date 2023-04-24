@@ -9,9 +9,11 @@ import { auth } from '../firebase';
 import { collection, addDoc, setDoc, doc, query, where, getDocs } from 'firebase/firestore';
 import { database } from '../firebase';
 import { useLocation, NavLink, useNavigate } from 'react-router-dom';
+import AppNav from '../components/AppNav';
+import { AppBar, Box } from '@mui/material';
 
 
-const Home = (props) => {
+const Upload = (props) => {
     const navigate = useNavigate();    
     const email = localStorage.getItem("email")
     
@@ -109,69 +111,72 @@ const Home = (props) => {
     }
 
   return (
-    <section className="upload-container">        
-        <Text>Upload Essay</Text>
-        <div>
+    <Box>
+        <AppNav/>
+    </Box>
+//     <section className="upload-container">       
+//         <Text>Upload Essay</Text>
+//         <div>
    
-            <div>
-                <input
-                    type="text" id = "name"
-                        placeholder="Essay Name?"
-                    onChange={(e)=>setEssayName(e.target.value)}
-                />
-            </div>
-            <div>
-                <input
-                    type="text" id = "revieweremail"
-                        placeholder="Reviewer Email?"
-                    onChange={(e)=>setReviewer1(e.target.value)}
-                />
-            </div>
-            <div>
-                <input
-                    type="text" id = "reviewer2email"
-                        placeholder=" Reviewer 2 Email (optional)"
-                    onChange={(e)=>setReviewer2(e.target.value)}
-                />
-            </div>
+//             <div>
+//                 <input
+//                     type="text" id = "name"
+//                         placeholder="Essay Name?"
+//                     onChange={(e)=>setEssayName(e.target.value)}
+//                 />
+//             </div>
+//             <div>
+//                 <input
+//                     type="text" id = "revieweremail"
+//                         placeholder="Reviewer Email?"
+//                     onChange={(e)=>setReviewer1(e.target.value)}
+//                 />
+//             </div>
+//             <div>
+//                 <input
+//                     type="text" id = "reviewer2email"
+//                         placeholder=" Reviewer 2 Email (optional)"
+//                     onChange={(e)=>setReviewer2(e.target.value)}
+//                 />
+//             </div>
 
-            <div>
-                <input
-                    type="text" id = "reviewer3email"
-                        placeholder="Reviewer 3 Email (optional)"
-                    onChange={(e)=>setReviewer3(e.target.value)}
-                />
-            </div>
+//             <div>
+//                 <input
+//                     type="text" id = "reviewer3email"
+//                         placeholder="Reviewer 3 Email (optional)"
+//                     onChange={(e)=>setReviewer3(e.target.value)}
+//                 />
+//             </div>
 
-            <div>
-                <input
-                    type="text" id = "essayLink"
-                        placeholder="Essay Link"
-                    onChange={(e)=>setEssayLink(e.target.value)}
-                />
-            </div>
-            <div>
-                <input
-                    type="text" id = "duedate"
-                        placeholder="Due Date"
-                    onChange={(e)=>setDueDate(e.target.value)}
-                />
-            </div>
+//             <div>
+//                 <input
+//                     type="text" id = "essayLink"
+//                         placeholder="Essay Link"
+//                     onChange={(e)=>setEssayLink(e.target.value)}
+//                 />
+//             </div>
+//             <div>
+//                 <input
+//                     type="text" id = "duedate"
+//                         placeholder="Due Date"
+//                     onChange={(e)=>setDueDate(e.target.value)}
+//                 />
+//             </div>
 
-        <div className="btn-container">
-            <button
-                type="submit"
-                className="btn"
-                onClick={uploadEssay}
-            >
-                Upload Essay
-            </button>
-        </div>
-</div>
-    </section>
+//         <div className="btn-container">
+//             <button
+//                 type="submit"
+//                 className="btn"
+//                 onClick={uploadEssay}
+//             >
+//                 Upload Essay
+//             </button>
+//         </div>
+// </div>
+//     </section>
   )
 }
 
-export default Home
+export default Upload
 
 

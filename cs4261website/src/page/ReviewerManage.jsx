@@ -4,6 +4,8 @@ import { getDoc, collection, where, query, doc, Firestore, getDocs } from 'fireb
 import EssayCard from '../components/EssayCard';
 import { useLocation, NavLink, useNavigate } from 'react-router-dom';
 import Text from '../components/elements/Text';
+import { Box } from '@mui/material';
+import AppNav from '../components/AppNav';
 
 const ReviewerManage = (props) => {
     const navigate = useNavigate();
@@ -94,38 +96,41 @@ const ReviewerManage = (props) => {
     }
 
     return (
-        <section>
-            <Text>Manage Essays (reviewers) </Text>
+        <Box>
+            <AppNav/>
+        </Box>
+        // <section>
+        //     <Text>Manage Essays (reviewers) </Text>
 
-            <div>
-                    {
-                        essayList?.map((essay,i)=>(
-                            <p key={i}>
-                                <Text>Essay Name: </Text>
-                                {essay.essay}
-                                <Text>Essay Due Date: </Text>
-                                {essay.due}
-                                <Text>Essay Student: </Text>
-                                {essay.student}
-                                <Text>Essay Link: </Text>
-                                {essay.link}
-                                <Text>Essay Feedback: </Text>
-                                {essay.feedback}
-                                <Text>Essay Progress: </Text>
-                                {essay.progress}
+        //     <div>
+        //             {
+        //                 essayList?.map((essay,i)=>(
+        //                     <p key={i}>
+        //                         <Text>Essay Name: </Text>
+        //                         {essay.essay}
+        //                         <Text>Essay Due Date: </Text>
+        //                         {essay.due}
+        //                         <Text>Essay Student: </Text>
+        //                         {essay.student}
+        //                         <Text>Essay Link: </Text>
+        //                         {essay.link}
+        //                         <Text>Essay Feedback: </Text>
+        //                         {essay.feedback}
+        //                         <Text>Essay Progress: </Text>
+        //                         {essay.progress}
                             
-                                    <iframe src={essay.link} style= {{ width:1000, height:600 }} ></iframe>
+        //                             <iframe src={essay.link} style= {{ width:1000, height:600 }} ></iframe>
                               
-                                <div className="btn-container">
-                                <button onClick={() => { addFeedback(essay.essay)} }>Add Feedback</button>
-                                </div>
-                            </p>
-                        ))
-                    }
+        //                         <div className="btn-container">
+        //                         <button onClick={() => { addFeedback(essay.essay)} }>Add Feedback</button>
+        //                         </div>
+        //                     </p>
+        //                 ))
+        //             }
 
-                </div>
+        //         </div>
 
-        </section>
+        // </section>
     )
 }
 
